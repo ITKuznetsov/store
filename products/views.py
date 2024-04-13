@@ -12,6 +12,7 @@ def index(request):
 
 def products(request):
     context = {
+        'title': 'Каталог',
         'products': Product.objects.all(),
         'categories': ProductCategory.objects.all(),
     }
