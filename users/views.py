@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from users.models import User
-from users.forms import UserLoginForm, UserRegistrationForm
-from django.contrib import auth
+from users.forms import UserLoginForm, UserRegistrationForm, UserProfileForm
+from django.contrib import auth, messages
 
 # Create your views here.
 
@@ -25,8 +25,9 @@ def log(request):
 def reg(request):
     if request.method == 'POST':
         form = UserRegistrationForm(data=request.POST)
-        if form.is_valid():
+        if form.is_valid(): 
             form.save()
+            messages.success(request, 'Регистрация прошла успешно!')
             return redirect('users:login')
     else:
         form = UserRegistrationForm()
@@ -35,4 +36,21 @@ def reg(request):
 
 
 def profile(request):
-    return render(request, 'users/profile.html')
+    if request.method == 'POST':
+        form = UserProfileForm(instance=request.user, data=request.POST, files=request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('users:profile')
+        else:
+            print(form.errors)
+    else:
+        form = UserProfileForm(instance=request.user)
+    context = {
+        'title': 'Store - Профиль', 'form': form
+    }
+    return render(request, 'users/profile.html', context)
+
+
+def logout(request):
+    auth.logout(request)
+    return redirect('products:index')
