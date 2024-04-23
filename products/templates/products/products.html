@@ -14,8 +14,11 @@
 
                 <h1 class="my-4">Store</h1>
                 <div class="list-group">
+                    {% if category_id %}
+                        <a href="{% url 'products:products' %}" class="list-group-item">Все категории</a>
+                    {% endif %}
                     {% for category in categories %}
-                        <a href="#" class="list-group-item">{{ category.name }}</a>
+                        <a href="{% url "products:category" category.id %}" class="list-group-item">{{ category.name }}</a>
                     {% endfor %}
                 </div>
 
@@ -32,13 +35,13 @@
                     </ol>
                     <div class="carousel-inner" role="listbox">
                         <div class="carousel-item active">
-                            <img class="d-block img-fluid" src="static/vendor/img/slides/slide-1.jpg" alt="First slide">
+                            <img class="d-block img-fluid" src="{% static "vendor/img/slides/slide-1.jpg" %}" alt="First slide">
                         </div>
                         <div class="carousel-item">
-                            <img class="d-block img-fluid" src="static/vendor/img/slides/slide-2.jpg" alt="Second slide">
+                            <img class="d-block img-fluid" src="{% static "vendor/img/slides/slide-2.jpg" %}" alt="Second slide">
                         </div>
                         <div class="carousel-item">
-                            <img class="d-block img-fluid" src="static/vendor/img/slides/slide-3.jpg" alt="Third slide">
+                            <img class="d-block img-fluid" src="{% static "vendor/img/slides/slide-3.jpg" %}" alt="Third slide">
                         </div>
                     </div>
                     <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
