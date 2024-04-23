@@ -7,6 +7,10 @@ class ProductCategory(models.Model):
     name = models.CharField(max_length=128)
     description = models.TextField(blank=True, null=False)
 
+    class Meta:
+        verbose_name = 'category'
+        verbose_name_plural = 'categories'
+
     def __str__(self) -> str:
         return self.name
 
@@ -18,6 +22,10 @@ class Product(models.Model):
     quantity = models.PositiveIntegerField(default=0)
     image = models.ImageField(upload_to='products_images')
     category = models.ForeignKey(to=ProductCategory, on_delete=models.PROTECT)
+
+    class Meta:
+        verbose_name = 'product'
+        verbose_name_plural = 'products'
 
     def __str__(self) -> str:
         return f'{self.name} | {self.category.name}'
@@ -38,6 +46,10 @@ class Basket(models.Model):
     created_timestamp = models.DateTimeField(auto_now_add=True)
     
     objects = BasketQuarySet.as_manager()
+
+    class Meta:
+        verbose_name = 'basket'
+        verbose_name_plural = 'baskets'
 
     def __str__(self):
         return f'{self.user.username} | {self.product.name}'
