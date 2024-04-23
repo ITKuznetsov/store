@@ -49,11 +49,11 @@ def profile(request):
     else:
         form = UserProfileForm(instance=request.user)
     baskets = Basket.objects.filter(user=request.user)
-    total_sum = sum(basket.sum() for basket in baskets)
-    total_quantity = sum(basket.quantity for basket in baskets)
+    # total_sum = sum(basket.sum() for basket in baskets)
+    # total_quantity = sum(basket.quantity for basket in baskets)
     context = {
         'title': 'Store - Профиль', 'form': form, 'baskets': baskets,
-        'total_sum': total_sum, 'total_quantity': total_quantity
+        # 'total_sum': total_sum, 'total_quantity': total_quantity
     }
     return render(request, 'users/profile.html', context)
 
