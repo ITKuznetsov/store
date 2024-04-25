@@ -5,23 +5,21 @@ from products.models import Product, ProductCategory, Basket
 from django.contrib.auth.decorators import login_required
 from django.views.generic.base import TemplateView
 from django.views.generic.list import ListView
+from common.views import TittleMixin
 
 # Create your views here.
 
 
-class IndexView(TemplateView):
+class IndexView(TittleMixin, TemplateView):
     template_name = 'products/index.html'
-
-    def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
-        context = super().get_context_data(**kwargs)
-        context['title'] = 'Store'
-        return context
+    title = 'Store'
     
 
-class ProductsListView(ListView):
+class ProductsListView(TittleMixin, ListView):
     model = Product
     template_name = 'products/products.html'
     paginate_by = 6
+    title = 'Store - Каталог'
 
     def get_queryset(self) -> QuerySet[Any]:
         queryset = super(ProductsListView, self).get_queryset()
@@ -30,7 +28,6 @@ class ProductsListView(ListView):
 
     def get_context_data(self, *, object_list=None, **kwargs: Any) -> dict[str, Any]:
         context = super(ProductsListView, self).get_context_data(**kwargs)
-        context['title'] = 'Каталог'
         context['categories'] = ProductCategory.objects.all()
         return context
 
