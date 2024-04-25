@@ -1,12 +1,16 @@
+from django.http import HttpRequest
+from django.http.response import HttpResponse as HttpResponse
 from django.urls import reverse_lazy
+from django.shortcuts import redirect
 from users.models import User
-from users.forms import UserLoginForm, UserRegistrationForm, UserProfileForm
+from users.forms import UserLoginForm, UserRegistrationForm, UserProfileForm, EmailVerification
 from products.models import Basket
 from django.views.generic.edit import CreateView, UpdateView
 from django.contrib.auth.views import LoginView
 from django.contrib.messages.views import SuccessMessageMixin
 from typing import Any
 from common.views import TittleMixin
+from django.views.generic import TemplateView
 
 # Create your views here.
 
@@ -40,3 +44,19 @@ class UserProfileView(TittleMixin, UpdateView):
         context = super(UserProfileView, self).get_context_data(**kwargs)
         context['baskets'] = Basket.objects.filter(user=self.object)
         return context
+    
+
+class EmailVerificationView(TittleMixin, TemplateView):
+    title = 'Store - Подтверждение электронной почты'
+    template_name = 'users/email_verification.html'
+
+    def get(self, request: HttpRequest, *args: reverse_lazy, **kwargs: reverse_lazy) -> HttpResponse:
+        code = kwargs.get('code')
+        user = User.objects.get(email=kwargs.get('email'))
+        email_verifications = EmailVerification.objects.filter(user=user, code=code)
+        if email_verifications.exists():
+            user.is_verified_email = True
+            user.save()
+            return super(EmailVerificationView, self).get(request, *args, **kwargs)
+        else:
+            return redirect('/')
