@@ -1,12 +1,12 @@
-from django.views.generic.edit import CreateView
+from django.urls import reverse_lazy
 from django.views.generic.base import TemplateView
+from django.views.generic.edit import CreateView
 from django.views.generic.list import ListView
+
+from common.views import TitleMixin
 from orders.forms import OrderForm
 from orders.models import Order
-from django.urls import reverse_lazy
-from common.views import TitleMixin
 
-# Create your views here.
 
 class OrderListView(TitleMixin, ListView):
     template_name = 'orders/orders.html'
@@ -17,15 +17,17 @@ class OrderListView(TitleMixin, ListView):
     def get_queryset(self):
         queryset = super(OrderListView, self).get_queryset()
         return queryset.filter(initiator=self.request.user)
-    
+
 
 class OrderSuccessView(TitleMixin, TemplateView):
     template_name = 'orders/success.html'
     title = 'Store - Заказ успешно сформирован'
 
+
 class OrderView(TitleMixin, TemplateView):
     template_name = 'orders/order.html'
     title = 'Store - Заказ'
+
 
 class OrderCreateView(TitleMixin, CreateView):
     template_name = 'orders/order-create.html'
@@ -36,5 +38,3 @@ class OrderCreateView(TitleMixin, CreateView):
     def form_valid(self, form):
         form.instance.initiator = self.request.user
         return super(OrderCreateView, self).form_valid(form)
-    
-    

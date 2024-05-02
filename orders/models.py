@@ -1,7 +1,7 @@
 from django.db import models
+
 from users.models import User
 
-# Create your models here.
 
 class Order(models.Model):
     CREATED = 0
@@ -14,7 +14,6 @@ class Order(models.Model):
         (ON_WAY, 'В пути'),
         (DELIVERED, 'Доставлен'),
     )
-
 
     first_name = models.CharField(max_length=64)
     last_name = models.CharField(max_length=64)

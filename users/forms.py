@@ -1,11 +1,16 @@
-from typing import Any
-from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, UserChangeForm
-from users.models import User, EmailVerification
-from django import forms
-from django.utils.timezone import now
-from datetime import timedelta
 import uuid
+from datetime import timedelta
+from typing import Any
+
+from django import forms
+from django.contrib.auth.forms import (AuthenticationForm, UserChangeForm,
+                                       UserCreationForm)
+from django.utils.timezone import now
+
+from users.models import EmailVerification, User
+
 # from users.tasks import send_email_verification
+
 
 class UserLoginForm(AuthenticationForm):
     username = forms.CharField(widget=forms.TextInput(attrs={
@@ -35,7 +40,6 @@ class UserRegistrationForm(UserCreationForm):
     class Meta:
         model = User
         fields = ('first_name', 'last_name', 'username', 'email', 'password1', 'password2')
-
 
     def save(self, commit: bool = True) -> Any:
         user = super(UserRegistrationForm, self).save(commit=True)

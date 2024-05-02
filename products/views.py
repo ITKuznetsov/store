@@ -1,13 +1,13 @@
 from typing import Any
+
+from django.contrib.auth.decorators import login_required
 from django.db.models.query import QuerySet
 from django.shortcuts import redirect
-from products.models import Product, ProductCategory, Basket
-from django.contrib.auth.decorators import login_required
 from django.views.generic.base import TemplateView
 from django.views.generic.list import ListView
-from common.views import TitleMixin
 
-# Create your views here.
+from common.views import TitleMixin
+from products.models import Basket, Product, ProductCategory
 
 
 class IndexView(TitleMixin, TemplateView):

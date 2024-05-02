@@ -1,11 +1,12 @@
+from datetime import timedelta
+from http import HTTPStatus
+
 from django.test import TestCase
 from django.urls import reverse
-from http import HTTPStatus
-from .models import User, EmailVerification
 from django.utils.timezone import now
-from datetime import timedelta
 
-# Create your tests here.
+from .models import EmailVerification, User
+
 
 class UserRegistrationViewTestCase(TestCase):
     fixtures = ['socialapp.json']
