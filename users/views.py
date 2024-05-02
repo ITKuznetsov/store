@@ -9,19 +9,19 @@ from django.views.generic.edit import CreateView, UpdateView
 from django.contrib.auth.views import LoginView
 from django.contrib.messages.views import SuccessMessageMixin
 from typing import Any
-from common.views import TittleMixin
+from common.views import TitleMixin
 from django.views.generic import TemplateView
 
 # Create your views here.
 
-class UserLoginView(TittleMixin, LoginView):
+class UserLoginView(TitleMixin, LoginView):
     template_name = 'users/login.html'
     form_class = UserLoginForm
     success_url = reverse_lazy('products:index')
     title = 'Store - Авторизация'
 
 
-class UserRegistrationView(TittleMixin, SuccessMessageMixin, CreateView):
+class UserRegistrationView(TitleMixin, SuccessMessageMixin, CreateView):
     model = User
     form_class = UserRegistrationForm
     template_name = 'users/registration.html'
@@ -30,7 +30,7 @@ class UserRegistrationView(TittleMixin, SuccessMessageMixin, CreateView):
     title = 'Store - Регистрация'
 
 
-class UserProfileView(TittleMixin, UpdateView):
+class UserProfileView(TitleMixin, UpdateView):
     model = User
     form_class = UserProfileForm
     template_name = 'users/profile.html'
@@ -41,7 +41,7 @@ class UserProfileView(TittleMixin, UpdateView):
         return self.request.user
     
 
-class EmailVerificationView(TittleMixin, TemplateView):
+class EmailVerificationView(TitleMixin, TemplateView):
     title = 'Store - Подтверждение электронной почты'
     template_name = 'users/email_verification.html'
 

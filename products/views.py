@@ -5,17 +5,17 @@ from products.models import Product, ProductCategory, Basket
 from django.contrib.auth.decorators import login_required
 from django.views.generic.base import TemplateView
 from django.views.generic.list import ListView
-from common.views import TittleMixin
+from common.views import TitleMixin
 
 # Create your views here.
 
 
-class IndexView(TittleMixin, TemplateView):
+class IndexView(TitleMixin, TemplateView):
     template_name = 'products/index.html'
     title = 'Store'
     
 
-class ProductsListView(TittleMixin, ListView):
+class ProductsListView(TitleMixin, ListView):
     model = Product
     template_name = 'products/products.html'
     paginate_by = 6
