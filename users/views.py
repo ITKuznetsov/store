@@ -2,8 +2,8 @@ from django.http import HttpRequest
 from django.http.response import HttpResponse as HttpResponse
 from django.urls import reverse_lazy
 from django.shortcuts import redirect
-from users.models import User
-from users.forms import UserLoginForm, UserRegistrationForm, UserProfileForm, EmailVerification
+from users.models import User, EmailVerification
+from users.forms import UserLoginForm, UserRegistrationForm, UserProfileForm
 from products.models import Basket
 from django.views.generic.edit import CreateView, UpdateView
 from django.contrib.auth.views import LoginView
