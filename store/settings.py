@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'orders',
     'products',
     'users',
+    'api',
 ]
 
 MIDDLEWARE = [
@@ -190,3 +191,10 @@ SOCIALACCOUNT_QUERY_EMAIL = True
 
 CELERY_BROKER_URL = 'redis://127.0.0.1:6379'
 CELERY_RESULT_BACKEND = 'redis://127.0.0.1:6379'
+
+# Django REST framework
+
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    'PAGE_SIZE': 3
+}
