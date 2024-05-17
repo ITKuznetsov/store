@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from products.models import Product
+from products.models import Product, ProductCategory
 
 
 class ProductSerializer(serializers.ModelSerializer):
@@ -8,4 +8,4 @@ class ProductSerializer(serializers.ModelSerializer):
         model = Product
         fields = ('id', 'name', 'description', 'price', 'quantity', 'image', 'category')
 
-    category = serializers.SlugRelatedField(slug_field='name', read_only=True)
+    category = serializers.SlugRelatedField(slug_field='name', queryset=ProductCategory.objects.all())
