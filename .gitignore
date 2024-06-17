@@ -2,6 +2,7 @@
 *~
 __pycache__
 venv
+.venv
 db.sqlite3
 .env
 .git
