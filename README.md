@@ -7,6 +7,8 @@
 * PostgreSQL
 * Redis
 * Celery
+## ERD
+![ER-диаграмма](https://github.com/mainelink/store/assets/161898140/fe7636d9-3756-4833-86f1-8f39f22e0ea5)
 ## Локальный запуск (Linux)
 1. Создайте и активируйте виртуальное окружение
    ```bash
