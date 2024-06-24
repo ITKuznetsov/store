@@ -27,8 +27,9 @@
    touch .env
    ```
 
-4. Выполните миграции
+4. Создайте и выполните миграции
    ```bash
+   python manage.py makemigrations
    python manage.py migrate
    ```
 
