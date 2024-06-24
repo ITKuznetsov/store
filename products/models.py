@@ -56,3 +56,18 @@ class Basket(models.Model):
     
     def sum(self):
         return self.product.price * self.quantity
+
+    @classmethod
+    def create_of_update(cls, product_id, user):
+        baskets = Basket.objects.filter(user=user, product_id=product_id)
+
+        if not baskets.exists():
+            obj = Basket.objects.create(user=user, product_id=product_id, quantity=1)
+            is_created = True
+            return obj, is_created
+        else:
+            basket = baskets.first()
+            basket.quantity += 1
+            basket.save()
+            is_created = False
+            return basket, is_created

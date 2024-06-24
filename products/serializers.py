@@ -19,7 +19,7 @@ class BasketSerializer(serializers.ModelSerializer):
         read_only_fields = ('created_timestamp',)
 
     product = ProductSerializer()
-    sum = fields.FloatField()
+    sum = fields.FloatField(required=False)
     total_sum = fields.SerializerMethodField()
     total_quantity = fields.SerializerMethodField()
 
