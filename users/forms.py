@@ -8,7 +8,6 @@ from django.contrib.auth.forms import (AuthenticationForm, UserChangeForm,
 from django.utils.timezone import now
 
 from users.models import User
-
 from users.tasks import send_email_verification
 
 

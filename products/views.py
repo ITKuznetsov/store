@@ -1,11 +1,11 @@
 from typing import Any
 
 from django.contrib.auth.decorators import login_required
+from django.core.cache import cache
 from django.db.models.query import QuerySet
 from django.shortcuts import redirect
 from django.views.generic.base import TemplateView
 from django.views.generic.list import ListView
-from django.core.cache import cache
 
 from common.views import TitleMixin
 from products.models import Basket, Product, ProductCategory
