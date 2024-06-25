@@ -3,7 +3,7 @@
 ## Технологии
 * Python
 * Django
-* Django REST framework
+* Django REST Framework
 * PostgreSQL
 * Redis
 * Celery
